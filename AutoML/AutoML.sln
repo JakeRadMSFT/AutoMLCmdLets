@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.128
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMLHelper", "AutoMLHelper\AutoMLHelper.csproj", "{ECECFD5D-D3B5-410E-B604-831FC7D9F832}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECECFD5D-D3B5-410E-B604-831FC7D9F832}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{ECECFD5D-D3B5-410E-B604-831FC7D9F832}.Release|Any CPU.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A7D9C27-A67B-4921-A245-7A98BC4202E6}
+	EndGlobalSection
+EndGlobal
