@@ -22,12 +22,6 @@ $experiment = $autoCatalog.CreateMulticlassClassificationExperiment(10);
 $bestRun = $experiment.Execute($trainDataView).BestRun;
 
 Write-Host "Best Trainer : " $bestRun.TrainerName
-Write-Host "ConfusionMatrix : " $bestRun.ValidationMetrics.ConfusionMatrix
-Write-Host "LogLoss : " $bestRun.ValidationMetrics.LogLoss 
-Write-Host "LogLossReduction : " $bestRun.ValidationMetrics.LogLossReduction 
-Write-Host "MacroAccuracy : " $bestRun.ValidationMetrics.MacroAccuracy 
-Write-Host "MicroAccuracy : " $bestRun.ValidationMetrics.MicroAccuracy 
-Write-Host "PerClassLogLoss : " $bestRun.ValidationMetrics.PerClassLogLoss
-Write-Host "TopKAccuracy : " $bestRun.ValidationMetrics.TopKAccuracy 
-Write-Host "TopKPredictionCount : " $bestRun.ValidationMetrics.TopKPredictionCount  
+
+$bestRun.ValidationMetrics | Select-Object -Property *
 
