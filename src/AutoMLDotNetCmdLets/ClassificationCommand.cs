@@ -12,9 +12,9 @@ using System;
 
 namespace AutoMLHelper
 {
-    [Cmdlet(VerbsLifecycle.Start, "Recommendation")]
-    [OutputType(typeof(ExperimentResult<RegressionMetrics>))]
-    public class RecommendationCommand : PSCmdlet
+    [Cmdlet(VerbsLifecycle.Start,"Classification")]
+    [OutputType(typeof(ExperimentResult<MulticlassClassificationMetrics>))]
+    public class ClassificationCommand : PSCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -31,20 +31,6 @@ namespace AutoMLHelper
 
         public string Label { get; set; }
 
-        [Parameter(
-            Mandatory = true,
-            Position = 2,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        public string User { get; set; }
-
-        [Parameter(
-            Mandatory = true,
-            Position = 3,
-            ValueFromPipeline = true,
-            ValueFromPipelineByPropertyName = true)]
-        public string Item { get; set; }
-
         // This method gets called once for each cmdlet in the pipeline when the pipeline starts executing
         protected override void BeginProcessing()
         {
@@ -55,21 +41,18 @@ namespace AutoMLHelper
         protected override void ProcessRecord()
         {
             var context = new MLContext();
-            var columnInferenceResults = AutoMLHelper.InferColumns(context, this.Path, new ColumnInformation() { LabelColumnName = this.Label, UserIdColumnName = this.User, ItemIdColumnName= this.Item }, null, null, null, false, false, true);
+            var columnInferenceResults = InferColumnsHelper.InferColumns(context, this.Path, new ColumnInformation() { LabelColumnName = this.Label }, null, null, null, false, false, true);
             var textLoader = context.Data.CreateTextLoader(columnInferenceResults.TextLoaderOptions, null);
             var trainDataset = textLoader.Load(new MultiFileSource(this.Path));
 
-            IProgress<RunDetail<RegressionMetrics>> progressHandler = new ProgressToCallback<RunDetail<RegressionMetrics>>((metric) =>
-                {
-                    WriteObject(metric);
-                });
+            IProgress<RunDetail<MulticlassClassificationMetrics>> progressHandler = new ProgressToCallback<RunDetail<MulticlassClassificationMetrics>>((metric) =>
+                 {
+                     WriteObject(metric);
+                 });
 
             var results = context.Auto()
-                .CreateRecommendationExperiment(10)
+                .CreateMulticlassClassificationExperiment(10)
                 .Execute(trainDataset, columnInferenceResults.ColumnInformation, null, progressHandler);
-
-            WriteVerbose("Best Trainer :" + results.BestRun.TrainerName);
-            WriteObject(results);
         }
 
         // This method will be called once at the end of pipeline execution; if no input is received, this method is not called

@@ -41,7 +41,7 @@ namespace AutoMLHelper
         protected override void ProcessRecord()
         {
             var context = new MLContext();
-            var columnInferenceResults = AutoMLHelper.InferColumns(context, this.Path, new ColumnInformation() { LabelColumnName = this.Label }, null, null, null, false, false, true);
+            var columnInferenceResults = InferColumnsHelper.InferColumns(context, this.Path, new ColumnInformation() { LabelColumnName = this.Label }, null, null, null, false, false, true);
             var textLoader = context.Data.CreateTextLoader(columnInferenceResults.TextLoaderOptions, null);
             var trainDataset = textLoader.Load(new MultiFileSource(this.Path));
 

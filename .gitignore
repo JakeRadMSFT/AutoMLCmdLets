@@ -2,3 +2,9 @@
 AutoML/AutoMLHelper/bin/
 
 AutoML/AutoMLHelper/obj/
+
+src/AutoMLDotNetCmdLets/obj/
+
+src/AutoMLDotNetCmdLets/bin/
+
+.vs/

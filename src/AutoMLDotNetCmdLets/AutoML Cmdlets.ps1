@@ -1,4 +1,4 @@
-ipmo C:\dev\MLNETAutoMLPowershellExample\AutoML\AutoMLHelper\bin\Debug\netcoreapp2.1\win-x64\AutoMLHelper.dll
+ipmo .\bin\Debug\netcoreapp2.1\win-x64\AutoMLDotNetCmdLets.dll
 
 
 Start-Classification -Path C:\dev\datasets\wikipedia-detox-250-line-data.tsv -Label sentiment -vb | ForEach-Object {$_.ValidationMetrics}

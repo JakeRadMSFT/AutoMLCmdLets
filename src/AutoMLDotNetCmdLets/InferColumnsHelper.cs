@@ -8,10 +8,10 @@ using Microsoft.ML.AutoML;
 
 namespace AutoMLHelper
 {
-    internal static class AutoMLHelper {
+    internal static class InferColumnsHelper {
         private static System.Reflection.MethodInfo InferColumnsMethodInfo;
-        static AutoMLHelper() {
-            AutoMLHelper.InferColumnsMethodInfo = typeof(Microsoft.ML.AutoML.ColumnInformation).Assembly.GetType("Microsoft.ML.AutoML.ColumnInferenceApi").GetMethod("InferColumns", new Type[] {
+        static InferColumnsHelper() {
+            InferColumnsHelper.InferColumnsMethodInfo = typeof(Microsoft.ML.AutoML.ColumnInformation).Assembly.GetType("Microsoft.ML.AutoML.ColumnInferenceApi").GetMethod("InferColumns", new Type[] {
                 typeof(Microsoft.ML.MLContext),
                 typeof(string),
                 typeof(Microsoft.ML.AutoML.ColumnInformation),
