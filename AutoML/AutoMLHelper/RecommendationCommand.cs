@@ -4,6 +4,7 @@ using System.Management.Automation.Runspaces;
 using Microsoft.ML;
 using Microsoft.ML.AutoML;
 using Microsoft.ML.Data;
+using System;
 
 
 // ipmo .\bin\Debug\netstandard2.0\win-x64\AutoMLHelper.dll
@@ -58,9 +59,14 @@ namespace AutoMLHelper
             var textLoader = context.Data.CreateTextLoader(columnInferenceResults.TextLoaderOptions, null);
             var trainDataset = textLoader.Load(new MultiFileSource(this.Path));
 
+            IProgress<RunDetail<RegressionMetrics>> progressHandler = new ProgressToCallback<RunDetail<RegressionMetrics>>((metric) =>
+                {
+                    WriteObject(metric);
+                });
+
             var results = context.Auto()
                 .CreateRecommendationExperiment(10)
-                .Execute(trainDataset, columnInferenceResults.ColumnInformation);
+                .Execute(trainDataset, columnInferenceResults.ColumnInformation, null, progressHandler);
 
             WriteVerbose("Best Trainer :" + results.BestRun.TrainerName);
             WriteObject(results);
